@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { projectFirestore } from '../../firebase/config';
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react';
 
 //styles
 import './Home.css'
