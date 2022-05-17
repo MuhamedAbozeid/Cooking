@@ -1,5 +1,8 @@
 import { useLocation } from 'react-router'
-import { useFetch } from '../../hooks/useFetch'
+// import { useFetch } from '../../hooks/useFetch'
+import { projectFirestore } from '../../firebase/config';
+import { useState, useEffect } from 'react';
+
 
 //styles
 import './Search.css'
@@ -7,16 +10,61 @@ import './Search.css'
 //components
 import RecipeList from '../../components/RecipeList'
 
+
+
 export default function Search() {
 
     const queryString = useLocation().search
     const queryParams = new URLSearchParams(queryString)
     const query = queryParams.get('q')
 
+    const [data, setData] = useState(null);
+    const [isPending, setIsPending] = useState(false)
+    const [error, setError] = useState(false)
 
-    const url = 'http://localhost:3000/recipes?q=' + query
 
-    const {error, isPending, data} = useFetch(url)
+
+
+    useEffect(() => {
+
+        setIsPending(true);
+
+
+        const unsub = projectFirestore.collection('recipes').onSnapshot((snapshot) => {
+            if (snapshot.empty) {
+                setError("No recipes to load");
+                setIsPending(false)
+            } else {
+
+             let results = [];
+
+             snapshot.docs.forEach((doc) => {
+                results.push({ ...doc.data(), id: doc.id });
+            });
+
+            setData(() => {
+                let filteredRecipes = results.filter((recipe) =>
+                  recipe.title.toLowerCase().includes(query.toLowerCase())
+                );
+                return filteredRecipes;
+              });
+
+            setIsPending(false)
+
+            }
+        },
+        (err) => {
+            setError(err.message);
+            setIsPending(false);
+          }
+        );
+
+        return () => unsub();
+
+       }, [query]);
+
+       
+
 
 
     return (
@@ -27,5 +75,5 @@ export default function Search() {
             {data && <RecipeList recipes={data} /> }
 
         </div>
-    )
+    );
 }

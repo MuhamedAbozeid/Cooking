@@ -2,12 +2,18 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { projectFirestore } from '../../firebase/config'
+import { useTheme } from '../../hooks/useTheme'
 
 
 //styles
 import './Create.css'
+import { Link } from 'react-router-dom';
 
 export default function Create() {
+
+    const { mode } = useTheme()
+
+
     const [title, setTitle] = useState('')
     const [method, setMethod] = useState('')
     const [cookingTime, setCookingTime] = useState('')
@@ -48,7 +54,8 @@ export default function Create() {
 
 
     return (
-        <div className='create'>
+    <div className='create-container'>
+        <div className={`create ${mode}`}>
             <h2 className='page-title'>Add a New Recipe</h2>
             
             <form onSubmit={handleSubmit}>
@@ -105,8 +112,15 @@ export default function Create() {
                 </label>
 
                <button className='btn'>submit</button>
-
+  
             </form>
+
+        
         </div>
+
+            <div className="back-container">
+                    <Link to='/'>back</Link>
+            </div>
+    </div>
     )
 }

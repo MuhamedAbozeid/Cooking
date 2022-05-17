@@ -4,6 +4,7 @@
     align-items: center;
     max-width: 1200px;
     margin: 20px auto;
+    padding: 0 1rem;
   }
   .theme-buttons div {
     display: inline-block;

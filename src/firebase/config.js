@@ -3,12 +3,12 @@ import 'firebase/firestore'
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAJQtVB810xLi-gaJ3ewOJgWT6nWQahrS8",
-    authDomain: "cooking-recipes-9881a.firebaseapp.com",
-    projectId: "cooking-recipes-9881a",
-    storageBucket: "cooking-recipes-9881a.appspot.com",
-    messagingSenderId: "463612362812",
-    appId: "1:463612362812:web:02a4dd310d29dde1424339"
+    apiKey: process.env.REACT_APP_COOKING_API_KEY,
+    authDomain: process.env.REACT_APP_COOKING_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_COOKING_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_COOKING_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_COOKING_MESSSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_COOKING_APP_ID
   };
 
 

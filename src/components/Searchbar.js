@@ -4,10 +4,13 @@ import { useState } from 'react'
 
 //styles
 import './Searchbar.css'
+// import Close from '../assets/close.svg'
 
 export default function Searchbar() {
 
     const [term, setTerm] = useState('')
+
+    // const [visible, setVisible] = useState(false);
 
     const navigate = useNavigate()
 
@@ -17,9 +20,13 @@ export default function Searchbar() {
         navigate(`/search?q=${term}`)
     }
 
+    // const handleClick =  () => {
+    //     setVisible(true);
+    // }
+
     return (
         <div className='searchbar'>
-            <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit}>
 
                 <label htmlFor="search">Search: </label>
                 <input 
@@ -28,7 +35,8 @@ export default function Searchbar() {
                 onChange={ (e) => setTerm(e.target.value)}
                 required
                 />
-            </form>
+            </form> 
+            
         </div>
     )
 }

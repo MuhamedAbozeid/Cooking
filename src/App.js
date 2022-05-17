@@ -16,7 +16,7 @@ import './App.css'
 
 function App() {
 
-
+  console.log(process.env)
   const { mode } = useTheme()
     
   return (

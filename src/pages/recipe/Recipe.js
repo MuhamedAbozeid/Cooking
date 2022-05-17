@@ -6,6 +6,7 @@ import { useParams } from 'react-router'
 import { useTheme } from './../../hooks/useTheme';
 import { useEffect, useState } from 'react';
 import { projectFirestore } from '../../firebase/config';
+import { Link } from 'react-router-dom';
 
 
 export default function Recipe() {
@@ -36,16 +37,17 @@ export default function Recipe() {
 
     }, [id])
 
-    const handleClick = () => {
-        projectFirestore.collection('recipes').doc(id).update({
-          title: 'Something completely different'
-        })
-      }
+    // const handleClick = () => {
+    //     projectFirestore.collection('recipes').doc(id).update({
+    //       title: 'Something completely different'
+    //     })
+    //   }
 
 
     return (
         <div className={`recipe ${mode}`}>
             
+            <div className='recipe-container'>
             {isPending && <p className='loading'>Loading....</p>}
             {error && <p className='error'>{error}</p>}
             {recipe && (
@@ -56,10 +58,14 @@ export default function Recipe() {
                      {recipe.ingredients.map( ing => <li key={ing}>{ing}</li>)}
                  </ul>
                  <p className="method">{recipe.method}</p>
-                 <button onClick={handleClick}>Update me</button>
+                 {/* <button onClick={handleClick}>Update me</button> */}
+                 <Link to='/'>back</Link>
+                 
+
                 </>
             )}
 
+            </div>
 
         </div>
     )

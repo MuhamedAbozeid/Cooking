@@ -17,7 +17,7 @@ export default function ThemeSlector() {
            
     }
 
-    console.log(mode)
+    // console.log(mode)
  
     return (
         <div className='theme-selector'>
